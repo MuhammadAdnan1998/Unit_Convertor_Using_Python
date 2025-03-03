@@ -4,13 +4,53 @@ from pint import UnitRegistry
 # streamlit is a Python library for creating web apps easily.
 # pint is a library used for unit conversions.
 
+# Streamlit page configuration
+st.set_page_config(page_title="Unit Converter", page_icon="🔄", layout="centered")
+# set_page_config() sets up the Streamlit app's page.
+# page_title="Unit Converter" sets the browser tab title.
+# page_icon="🔄" adds a refresh emoji as the favicon.
+# layout="centered" centers the app layout.
+
 # Main Function
 def main():
-    st.title("Unit Converter(Length, Mass, Time)")
-    st.write("This is a simple unit converter app using streamlit and pint libraries.")
     # Defines the main() function where the app's logic is implemented.
+
+    # Custom Styling
+    st.markdown(
+        """
+        <style>
+            body {
+                background-color: #f4f4f4;
+                font-family: Arial, sans-serif;
+            }
+            .stApp {
+                max-width: 600px;
+                margin: auto;
+                padding: 20px;
+                background: white;
+                border-radius: 10px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            }
+            .stTitle {
+                color: #2E3B55;
+                text-align: center;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+    # Uses Markdown to inject custom CSS styling.
+    # Sets a light gray background for the entire page.
+    # Centers the app inside a white box with rounded corners and a shadow.
+    # Defines a .stTitle class for styling titles.
+
+
+    st.title("🔄Unit Converter(Length, Mass, Time)")
     # st.title() sets the main heading of the app.
-    # st.write() is used to write text
+    
+    st.markdown("<h3 style='text-align: center; color: gray;'>This is a simple unit converter app using streamlit and pint libraries.</h3>", unsafe_allow_html=True)
+    # Uses HTML inside Markdown to display a centered subtitle in gray.
+    # unsafe_allow_html=True allows direct HTML usage.
 
     # Unit Registry
     ureg = UnitRegistry()
@@ -50,14 +90,14 @@ def main():
         # .to(to_unit) converts it to the target unit.
 
         # Displaying Results
-        st.success(f"{input_value} {from_unit} = {converted_value.magnitude:4f} {to_unit}")
+        st.success(f"✅{input_value} {from_unit} = {converted_value.magnitude:4f} {to_unit}")
         # Displays the conversion result in a formatted string.
         # .magnitude extracts the numeric value from the converted unit.
         # .4f ensures the output is displayed with four decimal places.
 
     # Handling Errors
     except Exception as e:
-        st.error(f"Error in conversion: {e}")
+        st.error(f"❌Error in conversion: {e}")
         # If an error occurs (e.g., invalid conversion), it catches the error and displays it.
 
 # Running the App
